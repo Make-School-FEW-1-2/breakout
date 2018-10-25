@@ -138,6 +138,7 @@
             } else if (leftPressed && paddleX > 0) {
                 paddleX -= 7;
             }
+            requestAnimationFrame(draw);
         }
 
         document.addEventListener("keydown", keyDownHandler, false);
@@ -191,7 +192,7 @@
             }
         }
 
-        setInterval(draw, 10);
+        draw()
     </script>
 
 </body>
