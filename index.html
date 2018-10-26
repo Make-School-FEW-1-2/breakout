@@ -45,13 +45,14 @@
         var rightPressed = false;
 
         // BRICKS
-        var brickRowCount = 3;
-        var brickColumnCount = 5;
-        var brickWidth = 75;
-        var brickHeight = 20;
-        var brickPadding = 10;
-        var brickOffsetTop = 30;
-        var brickOffsetLeft = 30;
+        const MULT = 5;
+        var brickRowCount = 3 * MULT;
+        var brickColumnCount = 5 * MULT;
+        var brickWidth = 75 / MULT;
+        var brickHeight = 20 / MULT;
+        var brickPadding = 10 / MULT;
+        var brickOffsetTop = 30 / MULT;
+        var brickOffsetLeft = 30 + 30 / MULT;
         var bricks = [];
         for (var c = 0; c < brickColumnCount; c++) {
             bricks[c] = [];
@@ -73,7 +74,7 @@
         function drawBall() {
             ctx.beginPath();
             ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-            ctx.fillStyle = "#0095DD";
+            ctx.fillStyle = "#dd0000";
             ctx.fill();
             ctx.closePath();
         }
@@ -81,7 +82,7 @@
         function drawPaddle() {
             ctx.beginPath();
             ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-            ctx.fillStyle = "#0095DD";
+            ctx.fillStyle = "#000000";
             ctx.fill();
             ctx.closePath();
         }
@@ -96,9 +97,11 @@
                         bricks[i][j].x = brickX;
                         bricks[i][j].y = brickY;
 
+                        const color = 360 / 15 / (MULT * MULT)  *  (j * 5 * MULT + i);
+
                         ctx.beginPath();
                         ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                        ctx.fillStyle = "#0095DD";
+                        ctx.fillStyle = `hsl(${color}, 100%, 50%)`;
                         ctx.fill();
                         ctx.closePath();
                     }
@@ -109,7 +112,11 @@
 
 
         function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.rect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#5485b8"
+            ctx.fill();
+            ctx.closePath();
             drawBall();
             drawPaddle();
             collisionDetection();
@@ -181,7 +188,8 @@
 
         function drawScore() {
             ctx.font = "16px Arial";
-            ctx.fillStyle = "#0095DD";
+            ctx.fillStyle = "#000000";
+            ctx.strokeStyle = "";
             ctx.fillText("Score: " + score, 8, 20);
         }
 
