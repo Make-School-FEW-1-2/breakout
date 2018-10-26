@@ -97,7 +97,7 @@
                         bricks[i][j].x = brickX;
                         bricks[i][j].y = brickY;
 
-                        const color = 360 / 15 / (MULT * MULT)  *  (j * 5 * MULT + i);
+                        const color = (360 / 15 / (MULT * MULT))  *  (j * 5 * MULT + i);
 
                         ctx.beginPath();
                         ctx.rect(brickX, brickY, brickWidth, brickHeight);
