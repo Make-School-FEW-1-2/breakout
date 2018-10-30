@@ -68,7 +68,43 @@
         // SCORE
         var score = 0;
 
+        function drawBackground() {
+            for(i = 0; i < 10; ++i) {
+                const x = canvas.width / 10 * i;
+                const y = 0;
+                const width = canvas.width / 10;
+                const height = canvas.height;
+                const color = `hsl(${360 / 10 * i}, 100%, 50%)`;
+                ctx.beginPath();
+                ctx.rect(x, y, width, height);
+                ctx.fillStyle = color;
+                ctx.fill();
+                ctx.closePath();
+            }
 
+            // ctx.fillStyle = 'red';
+            // ctx.beginPath();
+            // ctx.arc(canvas.width / 2, canvas.height / 2, canvas.height / 2, 0, 2 * Math.PI);
+            // ctx.fill();
+            // ctx.fillStyle = 'white';
+            // ctx.beginPath();
+            // ctx.arc(canvas.width / 2, canvas.height / 2, (canvas.height / 2) / 2, 0, 2 * Math.PI);
+            // ctx.fill();
+            // ctx.fillStyle = 'red';
+            // ctx.beginPath();
+            // ctx.arc(canvas.width / 2, canvas.height / 2, ((canvas.height / 2) / 2) / 2, 0, 2 * Math.PI);
+            // ctx.fill();
+
+            for(i = 6; i > -1 ; --i) {
+                const color = `hsl(${360 / 6 * -i}, 100%, 50%)`;
+                const x = canvas.width / 2;
+                const y = canvas.height;
+                ctx.beginPath();
+                ctx.fillStyle = color;
+                ctx.arc(x, y, x / 6 * i, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+        }
 
 
         function drawBall() {
@@ -103,7 +139,7 @@
                         ctx.rect(brickX, brickY, brickWidth, brickHeight);
                         // ctx.fillStyle = `hsl(${color}, 100%, 50%)`;
                         const brickgrad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-                        brickgrad.addColorStop(0 ,'#ef017c');
+                        brickgrad.addColorStop(0, '#ef017c');
                         brickgrad.addColorStop(1, '#ff5db1');
                         ctx.fillStyle = brickgrad;
                         ctx.fillRect(brickX, brickY, brickWidth, brickHeight);
@@ -119,13 +155,14 @@
 
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.beginPath();
-            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-            gradient.addColorStop(0, '#ff5db1');
-            gradient.addColorStop(1 ,'#ef017c');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.closePath();
+            // ctx.beginPath();
+            // const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            // gradient.addColorStop(0, '#ff5db1');
+            // gradient.addColorStop(1 ,'#ef017c');
+            // ctx.fillStyle = gradient;
+            // ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // ctx.closePath();
+            drawBackground();
             drawBall();
             drawPaddle();
             collisionDetection();
