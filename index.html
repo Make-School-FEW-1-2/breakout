@@ -45,7 +45,7 @@
         var rightPressed = false;
 
         // BRICKS
-        const MULT = 5;
+        const MULT = 2;
         var brickRowCount = 3 * MULT;
         var brickColumnCount = 5 * MULT;
         var brickWidth = 75 / MULT;
@@ -97,12 +97,18 @@
                         bricks[i][j].x = brickX;
                         bricks[i][j].y = brickY;
 
-                        const color = (360 / 15 / (MULT * MULT))  *  (j * 5 * MULT + i);
+                        // const color = (360 / 15 / (MULT * MULT))  *  (j * 5 * MULT + i);
 
                         ctx.beginPath();
                         ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                        ctx.fillStyle = `hsl(${color}, 100%, 50%)`;
-                        ctx.fill();
+                        // ctx.fillStyle = `hsl(${color}, 100%, 50%)`;
+                        const brickgrad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                        brickgrad.addColorStop(0 ,'#ef017c');
+                        brickgrad.addColorStop(1, '#ff5db1');
+                        ctx.fillStyle = brickgrad;
+                        ctx.fillRect(brickX, brickY, brickWidth, brickHeight);
+                        ctx.strokeStyle = "white";
+                        ctx.stroke();
                         ctx.closePath();
                     }
                 }
@@ -112,10 +118,13 @@
 
 
         function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.beginPath();
-            ctx.rect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#5485b8"
-            ctx.fill();
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#ff5db1');
+            gradient.addColorStop(1 ,'#ef017c');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.closePath();
             drawBall();
             drawPaddle();
