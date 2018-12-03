@@ -27,24 +27,65 @@
         var canvas = document.getElementById("myCanvas");
         var ctx = canvas.getContext("2d");
 
+
+
+
+
         // BALL
-        var x = canvas.width / 2;
-        var y = canvas.height - 30;
+
+        Ball ball = new Ball(10);
 
         var dx = 2;
         var dy = -2;
 
-        var ballRadius = 10;
+        class Ball {
+            constructor(radius, color = "#0095DD") {
+                this.radius = radius;
+                this.color = color;
+                this.x = canvas.width / 2;
+                this.y = canvas.height - 30;
+            }
+
+            render(ctx) {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+
 
         // PADDLE
-        var paddleHeight = 10;
-        var paddleWidth = 75;
-        var paddleX = (canvas.width - paddleWidth) / 2;
+        Paddle paddle = new Paddle(10, 75)
 
         var leftPressed = false;
         var rightPressed = false;
 
+        class Paddle {
+
+            constructor(height, width, color = "#000000") {
+                this.x = (canvas.width - paddleWidth) / 2;
+                this.y =
+                this.height = height;
+                this.width = width;
+                this.color = color;
+            }
+
+            render(ctx) {
+                ctx.beginPath();
+                ctx.rect(paddleX, canvas.height - this.hieght, this.width, this.height);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+
         // BRICKS
+
+        class Brick {
+            constructor(x, y, )
+        }
         const MULT = 2;
         var brickRowCount = 3 * MULT;
         var brickColumnCount = 5 * MULT;
@@ -69,7 +110,7 @@
         var score = 0;
 
         function drawBackground() {
-            for(i = 0; i < 10; ++i) {
+            for (i = 0; i < 10; ++i) {
                 const x = canvas.width / 10 * i;
                 const y = 0;
                 const width = canvas.width / 10;
@@ -95,7 +136,7 @@
             // ctx.arc(canvas.width / 2, canvas.height / 2, ((canvas.height / 2) / 2) / 2, 0, 2 * Math.PI);
             // ctx.fill();
 
-            for(i = 6; i > -1 ; --i) {
+            for (i = 6; i > -1; --i) {
                 const color = `hsl(${360 / 6 * -i}, 100%, 50%)`;
                 const x = canvas.width / 2;
                 const y = canvas.height;
@@ -107,21 +148,9 @@
         }
 
 
-        function drawBall() {
-            ctx.beginPath();
-            ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-            ctx.fillStyle = "#dd0000";
-            ctx.fill();
-            ctx.closePath();
-        }
 
-        function drawPaddle() {
-            ctx.beginPath();
-            ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-            ctx.fillStyle = "#000000";
-            ctx.fill();
-            ctx.closePath();
-        }
+
+
 
         function drawBricks() {
             for (var i = 0; i < brickColumnCount; ++i) {
